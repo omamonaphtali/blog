@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+    {{ post.title }} | {{ block.super }}
+{% endblock head_title %}
+
+<div class="col-sm-6 col-sm-offset-3">
+    {% block content %}
+    {{ title }}<br/>
+        {{ post.id }}<br/>
+        {{ post.title }}<br/>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }} avatar" class="img-responsive">
+        {% endif %}
+        <br/>
+        {{ post.content| linebreaks }}<br/>
+
+        {{ request.build_absolute_uri }}
+
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Share on Facebook</a>
+
+        <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
+            Share on Twitter
+            </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title
+        ={{ share_string }}%20me!&source={{ request.build_absolute_uri }}">
+        Share on Linkedin
+        </a>
+    {% endblock %}
+</div>
